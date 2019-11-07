@@ -39,6 +39,9 @@ class ViewController: UIViewController, WCSessionDelegate{
     let DEVICE_ID = "2b0040000f47363333343437"
     var myPhoton : ParticleDevice?
     
+    // partcle varibles
+    var timeElapseSendToParticle = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -99,6 +102,28 @@ class ViewController: UIViewController, WCSessionDelegate{
         }
     }
     
+    @IBOutlet weak var lblTimeElapsed: UILabel!
+    
+    @IBAction func btnStartMonitoringClicked(_ sender: Any) {
+        
+        print("sending Clicked")
+        self.timeOnphone()
+        
+        
+            }
+    
+    public func timeOnphone()
+    {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.timeElapseSendToParticle = self.timeElapseSendToParticle + 1
+                    self.lblTimeElapsed.text = "\(self.timeElapseSendToParticle)"
+                    self.timeOnphone()
+        
+                }
+    }
+
+    }
+    
    
     
     
@@ -110,5 +135,5 @@ class ViewController: UIViewController, WCSessionDelegate{
     
     
 
-}
+
 
